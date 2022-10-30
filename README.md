@@ -247,4 +247,5 @@ spacy train config.cfg --paths.vectors en_vectors_floret_md
 此外，你可以按照这些spaCy项目自己训练floret向量。
 
 [pipelines/floret_vectors_demo](pipelines/floret_vectors_demo)：训练并导入玩具英语向量
+
 [pipelines/floret_wiki_oscar_vectors](pipelines/floret_wiki_oscar_vectors)：在维基百科和OSCAR上训练任何支持语言的向量。
