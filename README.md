@@ -40,7 +40,7 @@ fastText也支持一系列的n-gram大小，所以用4-6-grams，你会有:
 
 有很多情况都能从子词信息中受益:
 
-#### 案例1：有许多后缀的词
+### 案例1：有许多后缀的词
 
 像芬兰语、匈牙利语、韩语或土耳其语这样的语言可以通过在单一词干上添加大量的后缀来构建单词。
 
@@ -50,7 +50,7 @@ Hungarian
 kalap+om+at (‘hat’ + POSSESSIVE + CASE: ‘my hat’, accusative)
 ```
 
-例如，一个匈牙利名词最多可以有五个与数量、占有和大小写有关的后缀。仅以上面的例子为例，如果正好有两个后缀，就有6个占有式词尾（单数/复数×第一/第二/第三人称）和18种情况，从而导致108种不同形式的卡拉普，而在英语中，向量表中只有两种形式，即帽子和笠帽。
+例如，一个匈牙利名词最多可以有五个与数量、占有和大小写有关的后缀。仅以上面的例子为例，如果正好有两个后缀，就有6个占有式词尾（单数/复数×第一/第二/第三人称）和18种情况，从而导致108种不同形式的 *kalap*，而在英语中，向量表中只有两种形式，即*hat和hats*。
 
 
 
@@ -82,7 +82,7 @@ German
 Bundesausbildungsförderungsgesetz (‘Federal Education and Training Assistance Act’)
 ```
 
-长的复合词往往可能是新的或非常不常见的，因此化合物中每个单元的子词都能改善向量，例如Bund, ausbild, förder, gesetz（'联邦'、'教育'、'协助'、'法律'）。
+长的复合词往往可能是新的或非常不常见的，因此复合词中每个单元的子词都能改善向量，例如Bund, ausbild, förder, gesetz (‘federal’, ‘education’, ‘assist’, ‘law’)。
 
 ### 案例4：拼写错误和新词
 
@@ -103,7 +103,7 @@ tweetstorm, gerrymeandering
 
 ![fastText with separate words and subwords](images/bloom-embeddings_separate_words_subwords.svg)
 
-一种可能性是直接支持spaCy中的大型子字表，但这将使spaCy管道膨胀到2GB以上的典型配置。由于这是不现实的，我们转向Thinc和spaCy已经使用的方法。布隆嵌入。通过Bloom嵌入，我们既可以支持子词，又可以大大减少向量表的大小。
+一种可能性是直接支持spaCy中的大型子字表，但这将使spaCy管道膨胀到2GB以上的典型配置。由于这是不现实的，我们转向Thinc和spaCy已经使用的方法-Bloom嵌入。通过Bloom嵌入，我们既可以支持子词，又可以大大减少向量表的大小。
 
 我们通过扩展fastText来实现floret，增加这两个选项:
 
@@ -113,7 +113,7 @@ tweetstorm, gerrymeandering
 
   ![floret words and subwords](images/bloom-embeddings_combined_words_subwords.svg)
 
-- **将每个条目散列成多行，以便能够减少散列表的大小**
+- **将每个条目哈希成多行，以便能够减少哈希表的大小**
 
 
 
@@ -137,7 +137,7 @@ fastText和floret之间最大的区别是向量表的大小。有了floret，我
 
 
 
-我们可以看到，尽管使用了一个小得多的散列表，floret还是保持了子词之间的关联性。尽管对于floret向量来说，余弦相似度总体上更接近于0，但热图对于个别的子词对来说显示出非常相似的模式，比如右面例子中深红色的rapy和ology表示相关后缀之间的相似性，或者中间例子中白色的不相关的子词circu和osaur。
+我们可以看到，尽管使用了一个小得多的哈希表，floret还是保持了子词之间的关联性。尽管对于floret向量来说，余弦相似度总体上更接近于0，但热图对于个别的子词对来说显示出非常相似的模式，比如右面例子中深红色的rapy和ology表示相关后缀之间的相似性，或者中间例子中白色的不相关的子词circu和osaur。
 
 接下来，我们要看一下已知词的最相似词。
 
