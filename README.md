@@ -1,14 +1,14 @@
 # floret：轻量级的、稳健的单词向量
 
-floret是fastText的一个扩展版本，它使用Bloom嵌入来创建包含单词和子词信息的紧凑矢量表。floret将fastText的子词带入spaCy管道，其矢量比传统单词矢量小10倍。
+floret是fastText的一个扩展版本，它使用Bloom嵌入来创建包含单词和子词信息的紧凑向量表。floret将fastText的子词带入spaCy管道，其向量比传统单词向量小10倍。
 
-在这篇博文中，我们将深入研究这些矢量。我们将解释它们是如何工作的，并展示它们在什么时候是有用的。如果你已经熟悉了floret的工作方式，请跳到fastText与floret的比较。
+在这篇博文中，我们将深入研究这些向量。我们将解释它们是如何工作的，并展示它们在什么时候是有用的。如果你已经熟悉了floret的工作方式，请跳到fastText与floret的比较。
 
 
 
-## **矢量表**
+## **向量表**
 
-对于许多向量表，包括spaCy中的默认向量，向量表包含一个固定的单词列表的条目，通常是训练数据中最常见的单词。向量表会有像报纸和报纸这样的词条，它们在向量上是相似的，但每个词条都作为一个完全独立的行存储在表中。
+对于许多向量表，包括spaCy中的默认向量，向量表包含一个固定的单词列表的条目，通常是训练数据中最常见的单词。向量表会有像*newspaper* 和*newspapers*这样的词条，它们在向量上是相似的，但每个词条都作为一个完全独立的行存储在表中。
 
 由于向量表中的单词数量有限，在某些时候，你会遇到一些不常见的、新奇的或嘈杂的单词，如newsspaper或doomscrolling，这些单词在训练中并没有出现。通常情况下，有一个特殊的未知向量用于这些词，在spaCy中是一个全零的向量。因此，虽然报纸和报纸的向量是相似的，但newsspaper的向量看起来完全不同，再加上它的全零向量使它看起来与其他所有的未知词相似，如AirTag或someverylongdomainname.com。
 
@@ -16,11 +16,11 @@ floret是fastText的一个扩展版本，它使用Bloom嵌入来创建包含单�
 
 ![floret unknown vector](images/floret_unknown_vector.png)
 
-为已知词和未知词提供更有用的向量的一个选择是纳入子词信息，因为像news和paper这样的子词可以用来将newspaper这样的词的向量与newsspaper这样的已知词和未知词联系起来。我们将看看fastText如何使用子词信息，解释floret如何扩展fastText以保持矢量表的大小，并探讨floret矢量的优势。
+为已知词和未知词提供更有用的向量的一个选择是纳入子词信息，因为像news和paper这样的子词可以用来将newspaper这样的词的向量与newsspaper这样的已知词和未知词联系起来。我们将看看fastText如何使用子词信息，解释floret如何扩展fastText以保持向量表的大小，并探讨floret向量的优势。
 
 
 
-## 具有子词信息的矢量
+## 具有子词信息的向量
 
 fastText使用字符n-gram子词：一个词的最终向量是全词的向量和所有子词的向量的平均值。例如，苹果的向量有4个格子词，它的向量是以下字符串的向量的平均值（<和>作为词的边界字符被添加）:
 
@@ -50,7 +50,7 @@ Hungarian
 kalap+om+at (‘hat’ + POSSESSIVE + CASE: ‘my hat’, accusative)
 ```
 
-例如，一个匈牙利名词最多可以有五个与数量、占有和大小写有关的后缀。仅以上面的例子为例，如果正好有两个后缀，就有6个占有式词尾（单数/复数×第一/第二/第三人称）和18种情况，从而导致108种不同形式的卡拉普，而在英语中，矢量表中只有两种形式，即帽子和笠帽。
+例如，一个匈牙利名词最多可以有五个与数量、占有和大小写有关的后缀。仅以上面的例子为例，如果正好有两个后缀，就有6个占有式词尾（单数/复数×第一/第二/第三人称）和18种情况，从而导致108种不同形式的卡拉普，而在英语中，向量表中只有两种形式，即帽子和笠帽。
 
 
 
@@ -121,7 +121,7 @@ tweetstorm, gerrymeandering
 
 ![floret with Bloom embeddings](images/bloom-embeddings_floret_bloom.svg)
 
-让我们比较一下fastText和floret矢量，并探索紧凑型floret矢量的优势!
+让我们比较一下fastText和floret向量，并探索紧凑型floret向量的优势!
 
 ### 词汇中的fastText与floret的比较
 
@@ -196,7 +196,7 @@ deflation	0.827	fibromatosis	0.794
 
 
 
-你可以在[这本协作笔记本](https://colab.research.google.com/github/explosion/floret/blob/main/examples/01_intro_to_floret.ipynb)中进一步探索英语的floret矢量!
+你可以在[这本协作笔记本](https://colab.research.google.com/github/explosion/floret/blob/main/examples/01_intro_to_floret.ipynb)中进一步探索英语的floret向量!
 
 ## 默认的与Floret 向量在SpaCy中的对比
 
@@ -222,13 +222,13 @@ floret (50K vectors, no OOV)
 
 [spaCy v3.2+](https://explosion.ai/blog/spacy-v3-2#floret)支持floret向量，从spaCy v3.3开始，我们已经开始提供使用这些向量的[训练管道](https://spacy.io/usage/v3-3#new-pipelines)。在spaCy v3.4中，你可以在所提供的克罗地亚语、芬兰语、韩语、瑞典语和乌克兰语的训练管道中看到floret向量的作用。
 
-### 下载英语的floret矢量
+### 下载英语的floret向量
 
-我们已经发布了这篇文章中使用的英语fastText和floret矢量的管道。
+我们已经发布了这篇文章中使用的英语fastText和floret向量的管道。
 
-你可以在这个[合作笔记本](https://colab.research.google.com/github/explosion/floret/blob/main/examples/01_intro_to_floret.ipynb)中探索这些英语的矢量!
+你可以在这个[合作笔记本](https://colab.research.google.com/github/explosion/floret/blob/main/examples/01_intro_to_floret.ipynb)中探索这些英语的向量!
 
-你可以用以下命令安装预建的spaCy矢量专用管道，并直接使用这些 spacy train。
+你可以用以下命令安装预建的spaCy向量专用管道，并直接使用这些 spacy train。
 
 ```
 # en_vectors_fasttext_lg
