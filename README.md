@@ -74,7 +74,7 @@ Inflected forms of valo (‘light’) include: valo, valon, valoa, valossa, valo
 
 
 
-一些语言，如德语和荷兰语，通过构建很长的单字形成复合词。
+一些语言，如德语和荷兰语，通过组合多个的单字形成复合词。
 
 ```
 German
