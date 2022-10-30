@@ -198,7 +198,7 @@ deflation	0.827	fibromatosis	0.794
 
 你可以在[这本协作笔记本](https://colab.research.google.com/github/explosion/floret/blob/main/examples/01_intro_to_floret.ipynb)中进一步探索英语的floret向量!
 
-## 默认的与Floret 向量在SpaCy中的对比
+## 默认向量与Floret 向量在SpaCy中的对比
 
 对比UD英语EWT的默认纯词fastText向量和floret向量，我们看到英语的两种向量的性能非常相似。
 
