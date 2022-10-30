@@ -200,7 +200,7 @@ deflation	0.827	fibromatosis	0.794
 
 ## 默认向量与Floret 向量在SpaCy中的对比
 
-对比UD英语EWT的默认纯词fastText向量和floret向量，我们看到英语的两种向量的性能非常相似。
+对比UD英语EWT的默认纯词fastText向量和floret向量，我们看到英语的两种向量的性能非常相似：
 
 ```
 UD English EWT for default vs. floret
